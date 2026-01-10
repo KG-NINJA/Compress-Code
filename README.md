@@ -14,6 +14,12 @@ The **CLI is the real engine**. The web app is a static, GitHub Pages–hosted *
 - Not a browser-based execution engine
 - Not minification or performance tuning
 
+## CLI usage
+```
+python compress-code.py <file> [--mode safe|aggressive] [--explain] [--diff]
+                         [--min-confidence 60] [--max-proposals 5] [--sort impact|confidence]
+```
+
 ## Repository layout
 ```
 compress-code/
@@ -29,3 +35,6 @@ compress-code/
 ## Web demo
 The GitHub Pages demo **does not execute code**. It only shows a mock/example output to illustrate the workflow.
 All real processing happens in the CLI (`compress-code.py`).
+
+## Note on GitHub Pages
+Set Pages to deploy from **/docs** (Settings → Pages → Branch: main / Folder: /docs).

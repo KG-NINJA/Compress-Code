@@ -5,32 +5,31 @@ const explainToggle = document.getElementById("explainToggle");
 const diffToggle = document.getElementById("diffToggle");
 
 const sample = {
-  summary: "Mock summary (surface cues only): 14 lines, 2 functions, no execution performed.",
+  summary: "Mock summary (surface cues only): 12 lines, 1 function, no execution performed.",
   proposals: [
     {
-      title: "Trim leading/trailing blank lines",
-      code: "def greet(name):\n    return f\"Hello {name}\"\n\n\ndef main():\n    print(greet(\"world\"))\n",
+      title: "Trim trailing blank lines",
+      code: "def greet(name):\n    return f\"Hello {name}\"\n",
       explanation:
-        "Removes empty lines at file boundaries only. Execution semantics remain unchanged.",
+        "Removed empty lines at the end of the file. Trailing blank lines do not affect execution semantics.",
       diff:
-        "--- original\n+++ proposal-1\n@@\n-\n def greet(name):\n     return f\"Hello {name}\"\n@@\n-\n def main():\n     print(greet(\"world\"))\n-\n",
+        "--- original\n+++ proposal-1\n@@\n-def greet(name):\n-    return f\"Hello {name}\"\n-\n-\n+def greet(name):\n+    return f\"Hello {name}\"\n",
     },
     {
       title: "Collapse consecutive blank lines",
       code: "def greet(name):\n    return f\"Hello {name}\"\n\n\ndef main():\n    print(greet(\"world\"))\n",
       explanation:
-        "Converts multiple blank lines to a single blank line. No control flow changes.",
+        "Collapsed multiple blank lines down to a single blank line. Whitespace-only lines outside strings are layout-only.",
       diff:
         "--- original\n+++ proposal-2\n@@\n-\n-\n+\n def main():\n     print(greet(\"world\"))\n",
     },
     {
-      title: "Remove redundant docstring (if unused)",
-      code:
-        "def greet(name):\n    \"\"\"Return greeting for the provided name.\"\"\"\n    return f\"Hello {name}\"\n\n\ndef main():\n    print(greet(\"world\"))\n",
+      title: "Inline immediate return variable",
+      code: "def greet(name):\n    return f\"Hello {name}\"\n",
       explanation:
-        "Docstrings can be removed when not used for runtime behavior. Only do this if no tooling relies on them.",
+        "Replaced a temporary assignment followed by return with a direct return. The variable is not reused.",
       diff:
-        "--- original\n+++ proposal-3\n@@\n-    \"\"\"Return greeting for the provided name.\"\"\"\n     return f\"Hello {name}\"\n",
+        "--- original\n+++ proposal-3\n@@\n-x = f(name)\n-return x\n+return f(name)\n",
     },
   ],
 };
@@ -99,7 +98,7 @@ function renderOutput() {
         Codex explores compression candidates. Humans evaluate and decide. Output is proposals only.
       </p>
       <p class="muted">
-        This demo does not perform real optimization or refactoring. The CLI is the execution layer.
+        This demo shows EXAMPLE output. For real proposals, use the CLI: <code>python compress-code.py &lt;file&gt;</code>.
       </p>
     </div>
   `);
