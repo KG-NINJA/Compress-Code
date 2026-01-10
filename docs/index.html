@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Compress-Code Demo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="notice" aria-live="polite">
+      <p>This is NOT random refactoring.</p>
+      <p>Search space is constrained by human intent.</p>
+      <p>Exploration is done by AI. Final selection is done by humans.</p>
+    </header>
+
+    <section class="intro">
+      <h1>Compress-Code: Proposal Demo</h1>
+      <p class="lede">
+        Codex explores compression candidates. Humans evaluate and decide. Output is proposals only.
+      </p>
+      <div class="meta">
+        <span>Static demo for GitHub Pages</span>
+        <span>CLI is the real engine</span>
+      </div>
+    </section>
+
+    <section class="panel input-panel">
+      <div class="panel-head">
+        <h2>Input Source</h2>
+        <p>Paste code to preview a mock proposal output. No code is executed or rewritten.</p>
+      </div>
+      <textarea id="sourceInput" spellcheck="false" placeholder="Paste source code here..."></textarea>
+      <div class="controls">
+        <div class="toggle-group">
+          <label>
+            <input type="radio" name="mode" value="safe" checked />
+            Mode: safe
+          </label>
+          <label>
+            <input type="radio" name="mode" value="aggressive" />
+            Mode: aggressive
+          </label>
+        </div>
+        <div class="toggle-group">
+          <label>
+            <input type="checkbox" id="explainToggle" checked />
+            Explain
+          </label>
+          <label>
+            <input type="checkbox" id="diffToggle" checked />
+            Diff
+          </label>
+        </div>
+        <button id="generateBtn">Generate Proposals</button>
+      </div>
+    </section>
+
+    <section class="panel output-panel">
+      <div class="panel-head">
+        <h2>Example Proposal Output</h2>
+        <p>This output is a demonstration template only. It is not derived from your code.</p>
+      </div>
+      <div id="outputArea" class="output">
+        <div class="output-block">
+          <h3>Code Summary</h3>
+          <p class="muted">Run “Generate Proposals” to populate this mock output.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel audit-panel">
+      <h2>Auditability Promise</h2>
+      <ul>
+        <li>No server-side execution</li>
+        <li>No API keys or authentication</li>
+        <li>No automatic edits or writes</li>
+        <li>Human review is required</li>
+      </ul>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
